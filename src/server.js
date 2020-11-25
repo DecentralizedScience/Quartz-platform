@@ -13,36 +13,38 @@ app.use(function(req, res, next) {
 
 app
     .post('/my-server/create-order', function(req, res) {
-        console.log(req)
-        //if(!req.query.amount){
-        //  req.query.amount = 20
-        //}
+        console.log(req.query)
+          if(!req.query.amount){
+            req.query.amount = 20
+        }
+        console.log(req.query)
+        console.log(req.params)
         //if(!req.query.email){
-        //  req.query.email = "a@a.a"
+          //req.query.email = "a@a.a"
         //}
         res.set("Content-Security-Policy", "default-src 'self'");
         request.post('https://api-m.sandbox.paypal.com/v2/checkout/orders', {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer XXXXX",  // TODO load from configuration file
-                "PayPal-Partner-Attribution-Id": "XXXX" // TODO load from configuration file
+                "PayPal-Partner-Attribution-Id": "XXX" // TODO load from configuration file
             },
             body: {
                 "intent": "CAPTURE",
                 "purchase_units": [{
                     "amount": {
-                        "currency_code": "USD",
-                        "value": 20 //req.query.amount
+                        "currency_code": "EUR",
+                        "value": req.query.amount
                     },
                     "payee": {
-                        "email_address": "seller-1@business.example.com" //req.query.email
+                        "email_address": "seller-1@business.example.com" // req.query.email
                     },
                     "payment_instruction": {
                         "disbursement_mode": "INSTANT",
                         "platform_fees": [{
                             "amount": {
-                                "currency_code": "USD",
-                                "value": 0.05*20//req.query.amount
+                                "currency_code": "EUR",
+                                "value": (0.05 * req.query.amount).toFixed(2)
                             }
                         }]
                     }
@@ -50,9 +52,10 @@ app
             },
             json: true
         }, function (err, response, body) {
-            console.log(body, response)
+            //console.log(body, response)
+            console.log(body)
             if (err) {
-                console.error(err);
+                //console.error(err);
                 res.json({
                   err:err
                 })
@@ -72,13 +75,13 @@ app
              request.post('https://api-m.sandbox.paypal.com/v2/checkout/orders/' + OrderID + '/capture', {
                  headers: {
                      "Content-Type": "application/json",
-                     "Authorization": "Bearer XXXXX", // TODO load from configuration file
-                     "PayPal-Partner-Attribution-Id": "XXXX"  // TODO load from configuration file
+                     "Authorization": "XXXXX", // TODO load from configuration file
+                     "PayPal-Partner-Attribution-Id": "XXX"  // TODO load from configuration file
                  }
              }, function (err, response, body) {
-               console.log(body, response)
+               //console.log(body, response)
                  if (err) {
-                     console.error(err);
+                     //console.error(err);
                      return res.sendStatus(500);
                  }
 

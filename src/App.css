@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+/*Paypal loads two sets of buttons, we delete one of them */
+.paypal-buttons:nth-child(2){
+  display: none !important;
+}
