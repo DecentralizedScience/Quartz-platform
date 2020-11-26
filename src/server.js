@@ -5,6 +5,13 @@ var app = express();
 
 console.log("AAAAAA")
 
+var configFile = require('./serverConfig.json')
+
+var access_token = configFile.access_token
+var attribution_id = configFile.attribution_id
+
+//console.log(access_token)
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -26,8 +33,8 @@ app
         request.post('https://api-m.sandbox.paypal.com/v2/checkout/orders', {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer XXXXX",  // TODO load from configuration file
-                "PayPal-Partner-Attribution-Id": "XXX" // TODO load from configuration file
+                "Authorization": "Bearer " + access_token,  // TODO load from configuration file
+                "PayPal-Partner-Attribution-Id": attribution_id // TODO load from configuration file
             },
             body: {
                 "intent": "CAPTURE",
@@ -75,8 +82,8 @@ app
              request.post('https://api-m.sandbox.paypal.com/v2/checkout/orders/' + OrderID + '/capture', {
                  headers: {
                      "Content-Type": "application/json",
-                     "Authorization": "XXXXX", // TODO load from configuration file
-                     "PayPal-Partner-Attribution-Id": "XXX"  // TODO load from configuration file
+                     "Authorization": "Bearer " + access_token, // TODO load from configuration file
+                     "PayPal-Partner-Attribution-Id": attribution_id  // TODO load from configuration file
                  }
              }, function (err, response, body) {
                //console.log(body, response)

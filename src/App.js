@@ -13,15 +13,17 @@ class App extends Component {
       onSuccess: this.props.onSuccess || (succ => {console.log(succ)}),
       onError: this.props.onError || (err => {console.error(err)}),
       onWait: this.props.onWait,
+      paypalCallPromise: this.props.paypalCallPromise
     }
     var amount = this.state.amount
 
     var onSuccess = this.state.onSuccess
     var onError = this.state.onError
     var onWait = this.state.onWait
+    var paypalCallPromise = this.state.paypalCallPromise
 
 
-    loadScript({ 'client-id': 'XXXX', 'currency': 'EUR'}) // TODO load from configuration file
+    loadScript({ 'client-id': 'AZ9f_hn-5Ce-1JEi-o0d1R_A0NI3VsHtXQFhSWtRyJYz9pi8u5tFqIV2nK41LivKuHx_F74wMNL0EYym', 'currency': 'EUR'}) // TODO load from configuration file
     .then(paypal => {
       window.btns = paypal.Buttons({
         createOrder: function (data, actions) {

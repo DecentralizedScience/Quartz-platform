@@ -5,7 +5,7 @@ Quartz platform using PayPal for marketplaces and platforms
 
 ## Community
 * join our [community forum](https://discuss.decentralized.science/)
-* connect at our [developers' chat](https://dec-sci.zulipchat.com/#narrow/stream/238971-development) 
+* connect at our [developers' chat](https://dec-sci.zulipchat.com/#narrow/stream/238971-development)
 
 ## Requisites
 To run and install this application you need:
@@ -31,7 +31,7 @@ curl -v https://api-m.sandbox.paypal.com/v1/oauth2/token \
 
 You also need a `Paypal-Partner-Attribution-Id`, that can be obtained by contacting the PayPal support team.
 
-After that, change the `Attribution-Id` and the `access-token` in `src/server.js` and the `client-id` in `src/app.js`.
+After that, copy `serverConfig.json.example` in `serverConfig.json` and set the `Attribution-Id`, the `access-token` and the `client-id`.
 
 Once everything is set up, the application can be run.
 
