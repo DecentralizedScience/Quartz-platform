@@ -89,7 +89,8 @@ class DonationButton extends Component {
       dialogWaitOpen: false,
       value: 20,
       buttonText: "DONATE WITH QUARTZ",
-      buttonPay: false
+      buttonPay: false,
+      email: ""
     }
   }
 
@@ -495,11 +496,30 @@ class DonationButton extends Component {
                       <b>Subscribe to our newsletter:</b>
                   </div>
                 </Grid>
-                <TextField
+                {/* <Grid item xs={12}>
+                //   <div class="subscribe">
+                //     <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css"/>
+                //     <div id="mc_embed_signup">
+                //       <form action="https://quartz.us2.list-manage.com/subscribe/post?u=11e1b249d0b1d7b9acf7c72f8&amp;id=5cc5470626" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                //         <div id="mc_embed_signup_scroll">
+                //   	      <label for="mce-EMAIL">Subscribe</label>
+                //   	      <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required></input>
+                //           <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_11e1b249d0b1d7b9acf7c72f8_5cc5470626" tabindex="-1" value=""/></div>
+                //           <div class="clear">
+                //             <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></input>
+                //           </div>
+                //         </div>
+                //       </form>
+                //     </div>
+                //   </div>
+                // </Grid>*/}
+
+                {/*<TextField
                   id="standard-name"
                   label="Email"
                   placeholder="Enter your email"
                   variant="outlined"
+                  onChange={ (e)=>{this.setState({email: e.target.value});} }
                   InputProps={{
                     endAdornment:
                       <Button
@@ -513,7 +533,49 @@ class DonationButton extends Component {
                   }}
                   style={{color: "#92699b"}}
                   color="#92699b"
+                />*/}
+
+                <form action="https://quartz.us2.list-manage.com/subscribe/post" method="POST" noValidate>
+                  <input type="hidden" name="u" value="11e1b249d0b1d7b9acf7c72f8"/>
+                  <input type="hidden" name="id" value="5cc5470626"/>
+                  <label htmlFor="MERGE0">
+                    <input
+                      type="email"
+                      name="EMAIL"
+                      id="MERGE0"
+                      value={this.state.email}
+                      onChange={ (e)=>{this.setState({email: e.target.value});} }
+                      autoCapitalize="off"
+                      autoCorrect="off"
+                    />
+                  </label>
+                  <input
+                    type="submit"
+                    value="OK"
+                    name="subscribe"
+                    id="mc-embedded-subscribe"
+                    className="button"
+                    style={{
+                      backgroundColor: '#F7C8D9',
+                      color: '#5B305B',
+                      fontSize: '14px',
+                      fontWeight: 'bold',
+                      padding: 5
+                    }}
                   />
+
+                  {/*<div style={{position: 'absolute', left: '-5000px'}} aria-hidden='true' aria-label="Please leave the following three fields empty">
+                    <label htmlFor="b_name">Name: </label>
+                    <input type="text" name="b_name" tabIndex="-1" value="" placeholder="Freddie" id="b_name"/>
+
+                    <label htmlFor="b_email">Email: </label>
+                    <input type="email" name="b_email" tabIndex="-1" value="" placeholder="youremail@gmail.com" id="b_email"/>
+
+                    <label htmlFor="b_comment">Comment: </label>
+                    <textarea name="b_comment" tabIndex="-1" placeholder="Please comment" id="b_comment"></textarea>
+                  </div>*/}
+                </form>
+
                 <Grid item xs={12} sm={12}>
                   <div
                     style={{
@@ -524,8 +586,23 @@ class DonationButton extends Component {
                     }}
                   >
                     <TwitterIcon style={{marginRight: 5, fontSize: "14px"}} />
-                    <p> Share your donation on Twitter and spread the word</p>
+                    <a
+                      href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                      target="_blank"
+                      class="twitter-share-button"
+                      data-text="I have just donated to Open Access with @quartzoa. Check it out and donate yoursef!"
+                      data-hashtags="#openaccess "
+                      data-related="quartzoa,decent_science"
+                      data-show-count="false"
+                      style={{
+                        color: '#92699b'
+                      }}
+                    >
+                      <p> Share your donation on Twitter and spread the word</p>
+                    </a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                   </div>
+
 
                 </Grid>
                 <Grid item xs={12} sm={12}>
