@@ -112,30 +112,12 @@ class DonationButton extends Component {
     this.setDialog1Open(false)
   }
 
-  setDialog2Open(val){
-    this.setState({dialog2Open: val})
-  }
-
-  handleDialog2ClickOpen = () => {
-    this.setDialog1Open(false)
-    this.setDialog2Open(true)
-  }
-
-  handleDialog2Close = () => {
-    this.setDialog2Open(false)
-  }
-
-  handleDialog2Back = () => {
-    this.setDialog1Open(true)
-    this.setDialog2Open(false)
-  }
-
   setDialogSuccessOpen(val){
     this.setState({dialogSuccessOpen: val})
   }
 
   handleDialogSuccessClickOpen = () => {
-    this.setDialog2Open(false)
+    this.setDialog1Open(false)
     this.setDialogSuccessOpen(true)
     this.setDialogWaitOpen(false)
   }
@@ -149,7 +131,7 @@ class DonationButton extends Component {
   }
 
   handleDialogErrorClickOpen = () => {
-    this.setDialog2Open(false)
+    this.setDialog1Open(false)
     this.setDialogErrorOpen(true)
     this.setDialogWaitOpen(false)
   }
@@ -163,7 +145,7 @@ class DonationButton extends Component {
   }
 
   handleDialogWaitClickOpen = () => {
-    this.setDialog2Open(false)
+    this.setDialog1Open(false)
     this.setDialogWaitOpen(true)
   }
 
@@ -185,47 +167,8 @@ class DonationButton extends Component {
     })
   }
 
-  donateButtonClick = () => {
-    {/*if(!this.state.buttonPay){
-      this.setState({
-        buttonText: <React.Fragment>
-            <Grid container spacing={2} alignItems="center" justify="center" direction="column">
-              <Grid item xs={12}>
-                <b>I WILL DONATE 20€</b>
-              </Grid>
-              <Grid item xs={12} style={{fontSize: "10px", marginTop: -10, paddingTop: 0}}>
-                (You can change the amount later)
-              </Grid>
-            </Grid>
-          </React.Fragment>,
-        buttonPay: true
-      })
-    } else {*/}
-      this.handleDialog1ClickOpen()
-    //}
-  }
-
   setHover = (val) => {
     this.setState({buttonHover: val})
-  }
-
-  renderButton = (hover) => {
-    if(hover){
-      return(
-        <React.Fragment>
-            <Grid container spacing={2} alignItems="center" justify="center" direction="column">
-              <Grid item xs={12}>
-                <b>I WILL DONATE 20€</b>
-              </Grid>
-              <Grid item xs={12} style={{fontSize: "10px", marginTop: -10, paddingTop: 0}}>
-                (You can change the amount later)
-              </Grid>
-            </Grid>
-          </React.Fragment>
-      )
-    } else {
-      return(this.state.buttonText)
-    }
   }
 
   handleCheck = (event) => {
@@ -270,33 +213,12 @@ class DonationButton extends Component {
               <Grid item xs={12}>
                 <Button
                   variant="contained"
-                  onClick={this.handleDialog2ClickOpen}
+                  onClick={this.handleDialog1ClickOpen}
                   onMouseOver={()=>{this.setHover(true)}}
                   onMouseOut={()=>{this.setHover(false)}}
                   style={{fontSize: "12px", backgroundColor: "#e495bd", color: "#ffffff", textTransform: "none", width: 180}}
                 >
-                {/*<Button
-                  variant="contained"
-                  onClick={this.donateButtonClick}
-                  onMouseOver={()=>{this.setState({
-                    buttonText: <React.Fragment>
-                        <Grid container spacing={2} alignItems="center" justify="center" direction="column">
-                          <Grid item xs={12}>
-                            <b>I WILL DONATE 20€</b>
-                          </Grid>
-                          <Grid item xs={12} style={{fontSize: "10px", marginTop: -10, paddingTop: 0}}>
-                            (You can change the amount later)
-                          </Grid>
-                        </Grid>
-                      </React.Fragment>})}}
-                  onMouseOut={()=>{this.setState({
-                    buttonText: "DONATE WITH QUARTZ"
-                  })}}
-                  style={{fontSize: "12px", backgroundColor: "#e495bd", color: "#ffffff", textTransform: "none", width: 180}}
-                >*/}
                   {hover?("I WILL DONATE 20€"):(this.state.buttonText)}
-                  {/*{this.state.buttonText}*/}
-                  {/*{this.renderButton(hover)}*/}
                 </Button>
               </Grid>
               <Grid item xs={12} style={{fontSize: "10px", paddingTop: 0, height:'100%'}}>
@@ -307,13 +229,13 @@ class DonationButton extends Component {
 
           {/* First dialog */}
           <Dialog
-            onClose={this.handleDialog2Close}
+            onClose={this.handleDialog1Close}
             aria-labelledby="payment-dialog"
-            open={this.state.dialog2Open}
+            open={this.state.dialog1Open}
           >
             <DialogTitle
               id="payment-dialog"
-              onClose={this.handleDialog2Close}
+              onClose={this.handleDialog1Close}
             >
               Modal title
             </DialogTitle>
@@ -379,14 +301,6 @@ class DonationButton extends Component {
                   </div>
                 </Grid>
                 <Grid item xs={6}>
-                  {/*<Button
-                    variant="contained"
-                    color="primary"
-                    onClick={this.handleDialog2Close}
-                    style={{fontSize:"12px", backgroundColor: "#e495bd", color: "#ffffff"}}
-                  >
-                    PAY WITH PAYPAL
-                  </Button>*/}
                   <App
                     amount={this.state.value}
                     onSuccess={this.handleDialogSuccessClickOpen}
@@ -403,26 +317,21 @@ class DonationButton extends Component {
                     label="By continuing you accept the terms & privacy policy"
                   />
                 </Grid>
-                <Grid container spacing={2}>
+                {/* Buttons for tests */}
+                {/*<Grid container spacing={2}>
                   <Grid item xs={3}>
-                    <Button
-                      onClick={this.handleDialog2Back}
-                      style={{fontSize:"12px", color: "#92699b"}}
-                    >
-                      GO BACK
-                    </Button>
                     <Button
                       onClick={this.handleDialogSuccessClickOpen}
                       style={{fontSize:"12px"}}
                     >
                       SUCCESS
                     </Button>
-                    {/*<Button
+                    <Button
                       onClick={this.handleDialogErrorClickOpen}
                       style={{fontSize:"12px"}}
                     >
                       ERROR
-                    </Button>*/}
+                    </Button>
                     <Button
                       onClick={this.handleDialogWaitClickOpen}
                       style={{fontSize:"12px"}}
@@ -430,7 +339,7 @@ class DonationButton extends Component {
                       WAIT
                     </Button>
                   </Grid>
-                </Grid>
+                </Grid>*/}
               </Grid>
               <Divider variant="middle" style={{color: "#e495bd"}}/>
               <Grid container spacing={2} alignItems="center" justify="center" direction="column">
@@ -534,44 +443,6 @@ class DonationButton extends Component {
                       <b>Subscribe to our newsletter:</b>
                   </div>
                 </Grid>
-                {/* <Grid item xs={12}>
-                //   <div class="subscribe">
-                //     <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css"/>
-                //     <div id="mc_embed_signup">
-                //       <form action="https://quartz.us2.list-manage.com/subscribe/post?u=11e1b249d0b1d7b9acf7c72f8&amp;id=5cc5470626" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                //         <div id="mc_embed_signup_scroll">
-                //   	      <label for="mce-EMAIL">Subscribe</label>
-                //   	      <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required></input>
-                //           <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_11e1b249d0b1d7b9acf7c72f8_5cc5470626" tabindex="-1" value=""/></div>
-                //           <div class="clear">
-                //             <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></input>
-                //           </div>
-                //         </div>
-                //       </form>
-                //     </div>
-                //   </div>
-                // </Grid>*/}
-
-                {/*<TextField
-                  id="standard-name"
-                  label="Email"
-                  placeholder="Enter your email"
-                  variant="outlined"
-                  onChange={ (e)=>{this.setState({email: e.target.value});} }
-                  InputProps={{
-                    endAdornment:
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={this.handleDialogSuccessClose}
-                        style={{fontSize:"12px", backgroundColor: "#e495bd", color: "#ffffff"}}
-                      >
-                        SUBSCRIBE
-                      </Button>
-                  }}
-                  style={{color: "#92699b"}}
-                  color="#92699b"
-                />*/}
 
                 <form action="https://quartz.us2.list-manage.com/subscribe/post" method="POST" noValidate>
                   <input type="hidden" name="u" value="11e1b249d0b1d7b9acf7c72f8"/>
@@ -601,17 +472,6 @@ class DonationButton extends Component {
                       padding: 5
                     }}
                   />
-
-                  {/*<div style={{position: 'absolute', left: '-5000px'}} aria-hidden='true' aria-label="Please leave the following three fields empty">
-                    <label htmlFor="b_name">Name: </label>
-                    <input type="text" name="b_name" tabIndex="-1" value="" placeholder="Freddie" id="b_name"/>
-
-                    <label htmlFor="b_email">Email: </label>
-                    <input type="email" name="b_email" tabIndex="-1" value="" placeholder="youremail@gmail.com" id="b_email"/>
-
-                    <label htmlFor="b_comment">Comment: </label>
-                    <textarea name="b_comment" tabIndex="-1" placeholder="Please comment" id="b_comment"></textarea>
-                  </div>*/}
                 </form>
 
                 <Grid item xs={12} sm={12}>
