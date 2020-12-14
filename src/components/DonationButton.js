@@ -20,6 +20,8 @@ import Link from '@material-ui/core/Link'
 import Divider from '@material-ui/core/Divider'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import PeopleIcon from '@material-ui/icons/People';
 import { withStyles } from '@material-ui/core/styles'
 
 import App from '../App.js'
@@ -318,6 +320,9 @@ class DonationButton extends Component {
             <DialogContent style={{width: 500}}>
               <Grid container spacing={2} alignItems="center" justify="center" direction="column">
                 <Grid item xs={12} sm={12}>
+                  <MenuBookIcon style={{color: "#92699b"}}/>
+                </Grid>
+                <Grid item xs={12} sm={12}>
                   <div
                     style={{
                       fontSize: "21px",
@@ -363,6 +368,9 @@ class DonationButton extends Component {
                     </IconButton>
                   </div>
                 </Grid>
+              </Grid>
+              <Divider variant="middle" style={{color: "#e495bd"}}/>
+              <Grid container spacing={2} alignItems="center" justify="center" direction="column">
                 <Grid item xs={12} sm={12}>
                   <div
                     style={{color: "#92699b", fontSize: "54px"}}
@@ -386,6 +394,9 @@ class DonationButton extends Component {
                     onWait={this.handleDialogWaitClickOpen}
                   />
                 </Grid>
+              </Grid>
+              <Divider variant="middle" style={{color: "#e495bd"}}/>
+              <Grid container spacing={2} alignItems="center" justify="center" direction="column">
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={<Checkbox checked={this.state.checkedA} onChange={this.handleChecked} name="checkedA" />}
@@ -420,6 +431,14 @@ class DonationButton extends Component {
                     </Button>
                   </Grid>
                 </Grid>
+              </Grid>
+              <Divider variant="middle" style={{color: "#e495bd"}}/>
+              <Grid container spacing={2} alignItems="center" justify="center" direction="column">
+                <Grid item xs={12} style={{marginTop:20}}>
+                  <PeopleIcon style={{marginRight:20}}/>
+                  <PeopleIcon />
+                  <PeopleIcon style={{marginLeft:20}}/>
+                </Grid>
                 <Grid item xs={12}>
                   <div
                     style={{
@@ -431,7 +450,10 @@ class DonationButton extends Component {
                     Quartz OA community  gives 1€ for each donation. This month, we contribute to XXX,
                     an Open Access Journal for black people in order to share knowledge, inspiration,
                     connection and resilience. Silence against systemic racism is not an option. Build
-                    the academic community you believe in. <b>Know more</b>
+                    the academic community you believe in.
+                    <Link href='http://quartz.to' target='blank' style={{color: "#000000"}}>
+                      <b>{" " + "Know more"}</b>
+                    </Link>
                   </div>
                 </Grid>
               </Grid>
@@ -630,14 +652,29 @@ class DonationButton extends Component {
                       backgroundColor: '#F7C8D9',
                       color: '#5B305B',
                       maxWidth: 480,
-                      fontSize: "14px"
+                      fontSize: "18px"
                     }}
                   >
-                    <div>
-                      Subscribe to our newsletter and find out what's new in the
-                      browser extension we are developing to facilitate micropayments
-                      within the academy
+                    <div style={{padding:10, paddingRight:40, paddingLeft:40}}>
+                      <b>Join QuartzOA and start doing automatic micro-donations.</b>
                     </div>
+                    <Grid container spacing={2} alignItems="center" justify="center" style={{marginLeft:10}}>
+                      <Grid item xs={6}>
+                        <Button
+                          variant="contained"
+                          target="_blank"
+                          href="http://quartz.to"
+                          style={{fontSize: "14px", backgroundColor: "#5B305B", color: "#ffffff", textTransform: "none"}}
+                        >
+                          <b>JOIN QUARTZ OA</b>
+                        </Button>
+                      </Grid>
+                      <Grid item xs={6} style={{marginLeft:-50}}>
+                        <div style={{fontSize: "14px"}}>
+                          You have {value*0.1}€ in credits!
+                        </div>
+                      </Grid>
+                    </Grid>
                   </Paper>
                 </Grid>
               </Grid>
