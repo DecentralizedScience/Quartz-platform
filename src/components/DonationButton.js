@@ -268,7 +268,7 @@ class DonationButton extends Component {
               <Grid item xs={12}>
                 <Button
                   variant="contained"
-                  onClick={this.donateButtonClick}
+                  onClick={this.handleDialog2ClickOpen}
                   onMouseOver={()=>{this.setHover(true)}}
                   onMouseOut={()=>{this.setHover(false)}}
                   style={{fontSize: "12px", backgroundColor: "#e495bd", color: "#ffffff", textTransform: "none", width: 180}}
@@ -304,105 +304,6 @@ class DonationButton extends Component {
           </Grid>
 
           {/* First dialog */}
-          <Dialog
-            onClose={this.handleDialog1Close}
-            arial-labelledby="quantity-dialog"
-            open={this.state.dialog1Open}
-            contentStyle={{maxWidth: 600}}
-          >
-            <DialogTitle
-              id="quantity-dialog"
-              onClose={this.handleDialog1Close}
-            >
-              Modal title
-            </DialogTitle>
-            <DialogContent style={{width: 500}}>
-              <Grid container spacing={2} alignItems="center" justify="center" direction="column">
-                <Grid item xs={12} sm={12}>
-                  <div
-                    style={{
-                      fontSize: "21px",
-                      maxWidth: 300,
-                      textAlign: 'center'
-                    }}
-                  >
-                    <b>HOW MUCH WOULD YOU LIKE TO DONATE?</b>
-                  </div>
-                </Grid>
-                <Grid item xs={12} sm={12}>
-                  <div
-                    style={{fontSize: "16px"}}
-                  >
-                    Dare to end precariousness at the academy.
-                  </div>
-                </Grid>
-              </Grid>
-              {/*<Divider variant="middle" />*/}
-              <Grid container spacing={2} alignItems="center" justify="center" direction="column">
-                <Grid item xs={12} sm={12}>
-                  <Paper
-                    className={classes.paper}
-                    variant="outlined"
-                    square
-                  >
-                    <IconButton
-                      color="primary"
-                      aria-label="substract money"
-                      component="span"
-                      onClick={this.onMinusClick}
-                      style={{color: "#e495bd"}}
-                    >
-                      <RemoveCircleIcon />
-                    </IconButton>
-                    <TextField
-                      id="standard-basic"
-                      value={value}
-                      onChange={this.handleChange}
-                      InputProps={{
-                        startAdornment: <InputAdornment position="start">€</InputAdornment>,
-                      }}
-                      style={{width: 50}}
-                    />
-                    <IconButton
-                      color="primary"
-                      aria-label="add money"
-                      component="span"
-                      onClick={this.onPlusClick}
-                      style={{color: "#e495bd"}}
-                    >
-                      <AddCircleIcon />
-                    </IconButton>
-                    {/*<InputBase
-                      className={classes.input}
-                      placeholder="€"
-                      autoFocus
-                      value={this.props.value}
-                      onChange={this.props.onChange}
-                      inputProps={{
-                        'aria-label': 'reviewers search',
-                        style: {textAlign: 'left', marginLeft:10}
-                      }}
-                    />*/}
-                  </Paper>
-                </Grid>
-              </Grid>
-              {/*<Divider variant="middle" />*/}
-              <Grid container spacing={2} alignItems="center" justify="center" direction="column">
-                <Grid item xs={12} sm={12}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={this.handleDialog2ClickOpen}
-                    style={{fontSize:"12px", backgroundColor: "#e495bd", color: "#ffffff"}}
-                  >
-                    DONATE {this.state.value} €
-                  </Button>
-                </Grid>
-              </Grid>
-            </DialogContent>
-          </Dialog>
-
-          {/*Second dialog*/}
           <Dialog
             onClose={this.handleDialog2Close}
             aria-labelledby="payment-dialog"
