@@ -18,6 +18,8 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
 import Divider from '@material-ui/core/Divider'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import { withStyles } from '@material-ui/core/styles'
 
 import App from '../App.js'
@@ -90,7 +92,9 @@ class DonationButton extends Component {
       value: 20,
       buttonText: "DONATE WITH QUARTZ",
       buttonPay: false,
-      email: ""
+      email: "",
+      buttonHover: false,
+      checked: false
     }
   }
 
@@ -180,7 +184,7 @@ class DonationButton extends Component {
   }
 
   donateButtonClick = () => {
-    if(!this.state.buttonPay){
+    {/*if(!this.state.buttonPay){
       this.setState({
         buttonText: <React.Fragment>
             <Grid container spacing={2} alignItems="center" justify="center" direction="column">
@@ -194,9 +198,39 @@ class DonationButton extends Component {
           </React.Fragment>,
         buttonPay: true
       })
-    } else {
+    } else {*/}
       this.handleDialog1ClickOpen()
+    //}
+  }
+
+  setHover = (val) => {
+    this.setState({buttonHover: val})
+  }
+
+  renderButton = (hover) => {
+    if(hover){
+      return(
+        <React.Fragment>
+            <Grid container spacing={2} alignItems="center" justify="center" direction="column">
+              <Grid item xs={12}>
+                <b>I WILL DONATE 20€</b>
+              </Grid>
+              <Grid item xs={12} style={{fontSize: "10px", marginTop: -10, paddingTop: 0}}>
+                (You can change the amount later)
+              </Grid>
+            </Grid>
+          </React.Fragment>
+      )
+    } else {
+      return(this.state.buttonText)
     }
+  }
+
+  handleCheck = (event) => {
+    this.setState({
+      ...this.state,
+      [event.target.name]: event.target.checked
+    })
   }
 
 
@@ -204,6 +238,7 @@ class DonationButton extends Component {
 
     const {classes} = this.props
     var value = this.state.value
+    var hover = this.state.buttonHover
 
     return(
       <Paper
@@ -229,13 +264,43 @@ class DonationButton extends Component {
             </Typography>
           </Grid>
           <Grid item xs={6}>
-            <Button
-              variant="contained"
-              onClick={this.donateButtonClick}
-              style={{fontSize: "12px", backgroundColor: "#e495bd", color: "#ffffff", textTransform: "none"}}
-            >
-              {this.state.buttonText}
-            </Button>
+            <Grid container spacing={2} alignItems="center" justify="center" direction="column">
+              <Grid item xs={12}>
+                <Button
+                  variant="contained"
+                  onClick={this.donateButtonClick}
+                  onMouseOver={()=>{this.setHover(true)}}
+                  onMouseOut={()=>{this.setHover(false)}}
+                  style={{fontSize: "12px", backgroundColor: "#e495bd", color: "#ffffff", textTransform: "none", width: 180}}
+                >
+                {/*<Button
+                  variant="contained"
+                  onClick={this.donateButtonClick}
+                  onMouseOver={()=>{this.setState({
+                    buttonText: <React.Fragment>
+                        <Grid container spacing={2} alignItems="center" justify="center" direction="column">
+                          <Grid item xs={12}>
+                            <b>I WILL DONATE 20€</b>
+                          </Grid>
+                          <Grid item xs={12} style={{fontSize: "10px", marginTop: -10, paddingTop: 0}}>
+                            (You can change the amount later)
+                          </Grid>
+                        </Grid>
+                      </React.Fragment>})}}
+                  onMouseOut={()=>{this.setState({
+                    buttonText: "DONATE WITH QUARTZ"
+                  })}}
+                  style={{fontSize: "12px", backgroundColor: "#e495bd", color: "#ffffff", textTransform: "none", width: 180}}
+                >*/}
+                  {hover?("I WILL DONATE 20€"):(this.state.buttonText)}
+                  {/*{this.state.buttonText}*/}
+                  {/*{this.renderButton(hover)}*/}
+                </Button>
+              </Grid>
+              <Grid item xs={12} style={{fontSize: "10px", paddingTop: 0, height:'100%'}}>
+                {hover?("(You can change the amount later)"):("")}
+              </Grid>
+            </Grid>
           </Grid>
 
           {/* First dialog */}
@@ -364,7 +429,37 @@ class DonationButton extends Component {
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <div>
-                    You will donate to this journal:
+                    You can change the amount if you prefer
+                  </div>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <div>
+                    <IconButton
+                      color="primary"
+                      aria-label="substract money"
+                      component="span"
+                      onClick={this.onMinusClick}
+                      style={{color: "#e495bd"}}
+                    >
+                      <RemoveCircleIcon />
+                    </IconButton>
+                    <TextField
+                      id="standard-basic"
+                      value={value}
+                      onChange={this.handleChange}
+                      variant="outlined"
+                      size="small"
+                      style={{width: 50}}
+                    />
+                    <IconButton
+                      color="primary"
+                      aria-label="add money"
+                      component="span"
+                      onClick={this.onPlusClick}
+                      style={{color: "#e495bd"}}
+                    >
+                      <AddCircleIcon />
+                    </IconButton>
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={12}>
@@ -388,6 +483,12 @@ class DonationButton extends Component {
                     onSuccess={this.handleDialogSuccessClickOpen}
                     onError={this.handleDialogErrorClickOpen}
                     onWait={this.handleDialogWaitClickOpen}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={<Checkbox checked={this.state.checkedA} onChange={this.handleChecked} name="checkedA" />}
+                    label="By continuing you accept the terms & privacy policy"
                   />
                 </Grid>
                 <Grid container spacing={2}>
@@ -417,6 +518,20 @@ class DonationButton extends Component {
                       WAIT
                     </Button>
                   </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <div
+                    style={{
+                      fontSize: "12px",
+                      maxWidth: 400,
+                      textAlign: 'center'
+                    }}
+                  >
+                    Quartz OA community  gives 1€ for each donation. This month, we contribute to XXX,
+                    an Open Access Journal for black people in order to share knowledge, inspiration,
+                    connection and resilience. Silence against systemic racism is not an option. Build
+                    the academic community you believe in. <b>Know more</b>
+                  </div>
                 </Grid>
               </Grid>
             </DialogContent>
