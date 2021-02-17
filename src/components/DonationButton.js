@@ -185,6 +185,12 @@ class DonationButton extends Component {
     var value = this.state.value
     var hover = this.state.buttonHover
 
+    var meta = document.createElement('meta');
+    meta.name = "monetization";
+    meta.content = "$https://ilp.uphold.com/YJwBWzddQDXq";
+    document.getElementsByTagName("head")[0].appendChild(meta)
+
+
     return(
       <Paper
         className={classes.paper2}
