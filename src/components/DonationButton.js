@@ -13,6 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import InputBase from '@material-ui/core/InputBase'
 import Paper from '@material-ui/core/Paper'
+import Container from '@material-ui/core/Container'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Typography from '@material-ui/core/Typography'
@@ -26,6 +27,8 @@ import { withStyles } from '@material-ui/core/styles'
 
 import App from '../App.js'
 import logo from '../img/logo.jpg'
+import Banner from '../img/fondo-banner.svg'
+import Confirmation from '../img/publication-ico.svg'
 
 
 const styles = theme => ({
@@ -57,6 +60,13 @@ const styles = theme => ({
     color: "#ffffff",
     width: 500,
     padding: 20
+  },
+  paperBanner: {
+    padding: 10,
+    backgroundImage: `url(${Banner})`,
+    color: '#5B305B',
+    maxWidth: 480,
+    fontSize: "18px"
   }
 })
 
@@ -419,66 +429,69 @@ class DonationButton extends Component {
             <DialogContent>
               <Grid container spacing={2} alignItems="center" justify="center" direction="column">
                 <Grid item xs={12} sm={12}>
+                  <img src={Confirmation} alt="Confirmation icon"/>
+                </Grid>
+                <Grid item xs={12} sm={12}>
                   <div
                     style={{
-                      color: "#92699b",
+                      //color: "#92699b",
                       fontSize: "21px",
-                      maxWidth: 300,
                       textAlign: 'center'
                     }}
                   >
-                    YOUR DONATION HAS BEEN MADE CORRECTLY
+                    <b>YOUR DONATION HAS BEEN MADE CORRECTLY</b>
                   </div>
                 </Grid>
-                <Grid item xs={12} sm={12}>
-                  <Grid container direction="row" justify="center" alignItems="center">
+                <Grid item xs={12} sm={12} style={{marginBottom: 20}}>
+                  {/*<Grid container direction="row" justify="center" alignItems="center">
                     <Grid item xs={6} align="right" style={{maxWidth: 100, marginRight: 30 }} >
                       <img src={logo} alt="Quartz logo" style={{width:100}}/>
                     </Grid>
-                    <Grid item xs={6} style={{fontSize: "16px", color: "#92699b", maxWidth: 300}}>
+                    <Grid item xs={6} style={{fontSize: "16px", maxWidth: 300}}>*/}
+                    <div style={{textAlign: 'center'}}>
                       <b>Quartz Open Access</b> rewards great
+                    </div>
+                    <div style={{textAlign: 'center'}}>
                       academic work and empower scholars.
+                    </div>
+                    <div style={{textAlign: 'center'}}>
                       Do you want to know more?
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid item xs={12}>
-                  <div
-                    style={{fontSize: "16px", color: "#92699b"}}
-                  >
-                      <b>Subscribe to our newsletter:</b>
-                  </div>
+                    </div>
+                    {/*</Grid>
+                  </Grid>*/}
                 </Grid>
 
-                <form action="https://quartz.us2.list-manage.com/subscribe/post" method="POST" noValidate>
-                  <input type="hidden" name="u" value="11e1b249d0b1d7b9acf7c72f8"/>
-                  <input type="hidden" name="id" value="5cc5470626"/>
-                  <label htmlFor="MERGE0">
-                    <input
-                      type="email"
-                      name="EMAIL"
-                      id="MERGE0"
-                      value={this.state.email}
-                      onChange={ (e)=>{this.setState({email: e.target.value});} }
-                      autoCapitalize="off"
-                      autoCorrect="off"
-                    />
-                  </label>
-                  <input
-                    type="submit"
-                    value="OK"
-                    name="subscribe"
-                    id="mc-embedded-subscribe"
-                    className="button"
+                {/*Espaciar bien*/}
+                <Grid item xs={12} sm={12}>
+                  <Button
+                    variant="contained"
+                    target="_blank"
+                    href="http://eepurl.com/hiY_7v"
+                    style={{fontSize: "14px", backgroundColor: "#5B305B", color: "#ffffff", textTransform: "none", width: 200}}
+                  >
+                    <b>JOIN QUARTZ OA</b>
+                  </Button>
+                </Grid>
+
+                <Grid item xs={12} sm={12}>
+                  <Container
                     style={{
-                      backgroundColor: '#F7C8D9',
+                      padding: -10,
+                      backgroundImage: `url(${Banner})`,
                       color: '#5B305B',
-                      fontSize: '14px',
-                      fontWeight: 'bold',
-                      padding: 5
+                      maxWidth: 480,
+                      fontSize: "18px"
                     }}
-                  />
-                </form>
+                  >
+                    <div style={{padding:5, paddingRight:80, paddingLeft: 10, paddingTop: 29}}>
+                      <b>Join QuartzOA and start doing automatic micro-donations.</b>
+                    </div>
+
+                    <div style={{fontSize: "14px", padding: 5, paddingLeft: 10, paddingBottom: 29}}>
+                      You have {value*0.1}€ in credits!
+                    </div>
+                  </Container>
+                </Grid>
 
                 <Grid item xs={12} sm={12}>
                   <div
@@ -506,43 +519,8 @@ class DonationButton extends Component {
                     </a>
                     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                   </div>
-
-
                 </Grid>
-                <Grid item xs={12} sm={12}>
-                  <Paper
-                    variant="outlined"
-                    square
-                    style={{
-                      padding: 10,
-                      backgroundColor: '#F7C8D9',
-                      color: '#5B305B',
-                      maxWidth: 480,
-                      fontSize: "18px"
-                    }}
-                  >
-                    <div style={{padding:10, paddingRight:40, paddingLeft:40}}>
-                      <b>Join QuartzOA and start doing automatic micro-donations.</b>
-                    </div>
-                    <Grid container spacing={2} alignItems="center" justify="center" style={{marginLeft:10}}>
-                      <Grid item xs={6}>
-                        <Button
-                          variant="contained"
-                          target="_blank"
-                          href="http://quartz.to"
-                          style={{fontSize: "14px", backgroundColor: "#5B305B", color: "#ffffff", textTransform: "none"}}
-                        >
-                          <b>JOIN QUARTZ OA</b>
-                        </Button>
-                      </Grid>
-                      <Grid item xs={6} style={{marginLeft:-50}}>
-                        <div style={{fontSize: "14px"}}>
-                          You have {value*0.1}€ in credits!
-                        </div>
-                      </Grid>
-                    </Grid>
-                  </Paper>
-                </Grid>
+
               </Grid>
             </DialogContent>
           </Dialog>
