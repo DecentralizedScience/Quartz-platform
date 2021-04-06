@@ -22,8 +22,11 @@ class App extends Component {
     var onWait = this.state.onWait
     var paypalCallPromise = this.state.paypalCallPromise
 
+    var configFile = require('./serverConfig.json')
+    var client_id = configFile.client_id
 
-    loadScript({ 'client-id': 'AZ9f_hn-5Ce-1JEi-o0d1R_A0NI3VsHtXQFhSWtRyJYz9pi8u5tFqIV2nK41LivKuHx_F74wMNL0EYym', 'currency': 'EUR'}) // TODO load from configuration file
+
+    loadScript({ 'client-id': client_id, 'currency': 'EUR'}) // TODO load from configuration file
     .then(paypal => {
       window.btns = paypal.Buttons({
         createOrder: function (data, actions) {
