@@ -1,7 +1,7 @@
 [![License: AGPL v3](https://img.shields.io/github/license/DecentralizedScience/Prototype?color=blue)](http://www.gnu.org/licenses/agpl-3.0)
 
 # Quartz-platform
-Quartz platform using PayPal for marketplaces and platforms
+Quartz platform using PayPal for marketplaces and platforms.
 
 ## Community
 * join our [community forum](https://discuss.decentralized.science/)
