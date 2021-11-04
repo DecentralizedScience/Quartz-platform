@@ -39,7 +39,7 @@ Once everything is set up, the application can be run.
 To run the server, open the src directory and run `nodemon`:
 ```
 cd src
-nodemon srver.js
+nodemon server.js
 ```
 
 ### Run the web app
