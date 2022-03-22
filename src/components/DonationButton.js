@@ -227,8 +227,9 @@ class DonationButton extends Component {
     const data = JSON.stringify({
       /*"receiver": "http://charlie-node:7770/accounts/charlie/spsp",*/
       /*"receiver": "https://51.91.8.116:443/accounts/acc2/spsp",*/
-      "receiver": "http://receive.quartz.to/accounts/acc2/spsp",
-      "source_amount": 20
+      /*"receiver": "http://receive.quartz.to/accounts/acc2/spsp",*/
+      "receiver": config.ILP_wallet + "spsp",
+      "source_amount": this.state.value
     })
 
     const options = {
@@ -281,7 +282,7 @@ class DonationButton extends Component {
     var meta = document.createElement('meta');
     meta.name = "monetization";
     /*meta.content = "$https://ilp.uphold.com/YJwBWzddQDXq";*/
-    meta.content = config.uphold_wallet;
+    meta.content = config.ILP_wallet;
     document.getElementsByTagName("head")[0].appendChild(meta)
 
 
