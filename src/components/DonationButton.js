@@ -29,6 +29,11 @@ import App from '../App.js'
 import logo from '../img/logo.jpg'
 import Banner from '../img/fondo-banner.svg'
 import Confirmation from '../img/publication-ico.svg'
+import Ilp from '../img/ilp.jpeg'
+
+import config from './config.json'
+
+var https = require('https');
 
 
 const styles = theme => ({
@@ -101,6 +106,7 @@ class DonationButton extends Component {
       dialogSuccessOpen: false,
       dialogErrorOpen: false,
       dialogWaitOpen: false,
+      dialogInterledgerOpen: false,
       value: 20,
       buttonText: "DONATE WITH QUARTZ",
       buttonPay: false,
@@ -163,6 +169,19 @@ class DonationButton extends Component {
     this.setDialogWaitOpen(false)
   }
 
+  setDialogInterledgerOpen(val){
+    this.setState({dialogInterledgerOpen: val})
+  }
+
+  handleDialogInterledgerClickOpen = () => {
+    this.setDialog1Open(false)
+    this.setDialogInterledgerOpen(true)
+  }
+
+  handleDialogInterledgerClose = () => {
+    this.setDialogInterledgerOpen(false)
+  }
+
   onPlusClick = () => {
     this.setState({value: parseInt(this.state.value)+1})
   }
@@ -188,6 +207,70 @@ class DonationButton extends Component {
     })
   }
 
+  /*sendIlpPayment = () => {
+    console.log("sendIlpPayment begins")
+    //fetch('http://localhost:8080/?from=alice&to=http://charlie-node:7770/accounts/charlie/spsp&amount=20', {
+    fetch('http://localhost:8080/?from=alice&to='+config.ILP_wallet+'spsp&amount=20', {
+//      mode: 'cors',
+//      credentials: 'include',
+      headers: {
+        Authorization: 'Bearer alice_password'
+      }
+    }).then(() => console.log("then")).catch((err) => console.log("catch: "+err))
+      console.log("sendIlpPayment ends")
+  }*/
+
+  /**Sends a singular payment via the Interledger Network**/
+  sendIlpPayment = () => {
+    console.log("sendIlpPayment begins")
+
+    const data = JSON.stringify({
+      /*"receiver": "http://charlie-node:7770/accounts/charlie/spsp",*/
+      /*"receiver": "https://51.91.8.116:443/accounts/acc2/spsp",*/
+      "receiver": "http://receive.quartz.to/accounts/acc2/spsp",
+      "source_amount": 20
+    })
+
+    const options = {
+      /*hostname: '192.168.128.4',
+      port: 7770,*/
+      /*hostname: "51.91.8.116",
+      port: 443,*/
+      hostname: 'receive.quartz.to',
+      /*hostname: "51.91.8.116",
+      port: 7770,*/
+      /*path: '/accounts/' + 'alice' + '/payments',*/
+      path: '/accounts/' + 'acc1' + '/payments',
+      method: 'POST',
+      headers: {
+        /*'Authorization': 'Bearer alice_password',*/
+        'Authorization': 'Bearer acc1_password',
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Content-Length': data.length,
+      }
+    }
+
+    const req = https.request(options, res2 => {
+
+      res2.on('data', d => {
+        console.log('200', d.toString());
+      })
+    })
+
+    req.on('error', error => {
+      console.log('500', 'Internal Server Error')
+      console.error(error)
+    })
+
+    req.write(data)
+    req.end()
+
+    /*var txt = "Amount: " + 20 + ", from: " + "alice" + ", to: " + "http://charlie-node:7770/accounts/charlie/spsp";*/
+    var txt = "Amount: " + 20 + ", from: " + "acc1" + ", to: " + "https://send.quartz.to/accounts/acc2/spsp"
+    console.log(txt);
+  }
+
 
   render() {
 
@@ -197,7 +280,8 @@ class DonationButton extends Component {
 
     var meta = document.createElement('meta');
     meta.name = "monetization";
-    meta.content = "$https://ilp.uphold.com/YJwBWzddQDXq";
+    /*meta.content = "$https://ilp.uphold.com/YJwBWzddQDXq";*/
+    meta.content = config.uphold_wallet;
     document.getElementsByTagName("head")[0].appendChild(meta)
 
 
@@ -323,6 +407,15 @@ class DonationButton extends Component {
                     onError={this.handleDialogErrorClickOpen}
                     onWait={this.handleDialogWaitClickOpen}
                   />
+                </Grid>
+                <Grid item xs={6}>
+                  <Button
+                    variant="contained"
+                    onClick={this.handleDialogInterledgerClickOpen}
+                    style={{fontSize:"12px",backgroundColor: "#5B305B", color: "#ffffff", textTransform: "none", width: 200, marginBottom: 20}}
+                  >
+                    PAY WITH INTERLEDGER
+                  </Button>
                 </Grid>
               </Grid>
               <Divider variant="middle" style={{color: "#e495bd"}}/>
@@ -557,6 +650,84 @@ class DonationButton extends Component {
               </Grid>
             </DialogContent>
           </Dialog>
+
+
+
+          {/*Interledger dialog*/}
+          <Dialog
+            onClose={this.handleDialogInterledgerClose}
+            arial-labelledby="quantity-dialog"
+            open={this.state.dialogInterledgerOpen}
+          >
+            <DialogTitle
+              id="quantity-dialog"
+              onClose={this.handleDialogInterledgerClose}
+            >
+              Modal title
+            </DialogTitle>
+            <DialogContent
+              style={{width:400}}
+            >
+              <Grid container spacing={2} alignItems="center" justify="center" direction="column">
+                <Grid item xs={12} sm={12}>
+                  <img src={Ilp} alt="ILP logo" style={{width: 70}}/>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <div
+                    style={{
+                      //color: "#92699b",
+                      fontSize: "21px",
+                      textAlign: 'center'
+                    }}
+                  >
+                    <b>INTERLEDGER</b>
+                  </div>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <div
+                    style={{
+                      //color: "#92699b",
+                      fontSize: "21px",
+                      textAlign: 'center'
+                    }}
+                  >
+                    Pay with an ILP account
+                  </div>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <TextField
+                    disabled
+                    id="outlined-basic"
+                    label="ILP node"
+                    variant="outlined"
+                    defaultValue="QUARTZ"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <TextField id="outlined-basic" label="User" variant="outlined" />
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <TextField id="outlined-basic" label="Password" variant="outlined" type="password" />
+                </Grid>
+
+                {/*Espaciar bien*/}
+                {/*Este botón lo que tiene que hacer es el equivalente al curl para la petición INTERLEDGER*/
+                 /*onClick={this.sendIlpPayment}*/ }
+                <Grid item xs={12} sm={12}>
+                  <Button
+                    variant="contained"
+                    target="_blank"
+                    onClick={this.sendIlpPayment}
+                    style={{fontSize: "14px", backgroundColor: "#5B305B", color: "#ffffff", textTransform: "none", width: 200, marginBottom:50, marginTop: 20}}
+                  >
+                    <b>PAY</b>
+                  </Button>
+                </Grid>
+
+              </Grid>
+            </DialogContent>
+          </Dialog>
+
         </Grid>
 
       </Paper>

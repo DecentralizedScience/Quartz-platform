@@ -1,0 +1,5 @@
+{
+  "text": "Hola esto es un texto escrito en el fichero de configuración",
+  "uphold_wallet": "$https://ilp.uphold.com/YJwBWzddQDXq",
+  "ILP_wallet": "http://charlie-node:7770/accounts/charlie/"
+}
