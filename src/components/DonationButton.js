@@ -221,47 +221,21 @@ class DonationButton extends Component {
     })
   }
 
-  /*sendIlpPayment = () => {
-    console.log("sendIlpPayment begins")
-    //fetch('http://localhost:8080/?from=alice&to=http://charlie-node:7770/accounts/charlie/spsp&amount=20', {
-    fetch('http://localhost:8080/?from=alice&to='+config.ILP_wallet+'spsp&amount=20', {
-//      mode: 'cors',
-//      credentials: 'include',
-      headers: {
-        Authorization: 'Bearer alice_password'
-      }
-    }).then(() => console.log("then")).catch((err) => console.log("catch: "+err))
-      console.log("sendIlpPayment ends")
-  }*/
-
   /**Sends a singular payment via the Interledger Network**/
   sendIlpPayment = () => {
     console.log("sendIlpPayment begins")
 
     const data = JSON.stringify({
-      /*"receiver": "http://charlie-node:7770/accounts/charlie/spsp",*/
-      /*"receiver": "https://51.91.8.116:443/accounts/acc2/spsp",*/
-      /*"receiver": "http://receive.quartz.to/accounts/acc2/spsp",*/
       "receiver": config.ILP_wallet + "spsp",
       "source_amount": this.state.value
     })
 
     const options = {
-      /*hostname: '192.168.128.4',
-      port: 7770,*/
-      /*hostname: "51.91.8.116",
-      port: 443,*/
       hostname: 'receive.quartz.to',
-      /*hostname: "51.91.8.116",
-      port: 7770,*/
-      /*path: '/accounts/' + 'alice' + '/payments',*/
-      /*path: '/accounts/' + 'acc1' + '/payments',*/
-      path: '/accounts/' + this.state.ILPuser + '/payments',
+      path: '/accounts/' + this.state.ILPuser + '/payments', //For tests use: acc1
       method: 'POST',
       headers: {
-        /*'Authorization': 'Bearer alice_password',*/
-        /*'Authorization': 'Bearer acc1_password',*/
-        'Authorization': 'Bearer ' + this.state.ILPpassword,
+        'Authorization': 'Bearer ' + this.state.ILPpassword, //For tests use: acc1_password
         'accept': 'application/json',
         'Content-Type': 'application/json',
         'Content-Length': data.length,
@@ -283,7 +257,6 @@ class DonationButton extends Component {
     req.write(data)
     req.end()
 
-    /*var txt = "Amount: " + 20 + ", from: " + "alice" + ", to: " + "http://charlie-node:7770/accounts/charlie/spsp";*/
     var txt = "Amount: " + this.state.value + ", from: " + "acc1" + ", to: " + "https://send.quartz.to/accounts/acc2/spsp"
     console.log(txt);
   }
@@ -299,7 +272,6 @@ class DonationButton extends Component {
 
     var meta = document.createElement('meta');
     meta.name = "monetization";
-    /*meta.content = "$https://ilp.uphold.com/YJwBWzddQDXq";*/
     meta.content = config.ILP_wallet;
     document.getElementsByTagName("head")[0].appendChild(meta)
 
