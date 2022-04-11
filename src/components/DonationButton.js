@@ -112,7 +112,9 @@ class DonationButton extends Component {
       buttonPay: false,
       email: "",
       buttonHover: false,
-      checked: false
+      checked: false,
+      ILPuser: "",
+      ILPpassword: ""
     }
   }
 
@@ -207,6 +209,18 @@ class DonationButton extends Component {
     })
   }
 
+  handleUserChange = (event) => {
+    this.setState({
+      ILPuser: event.target.value
+    })
+  }
+
+  handlePasswordChange = (event) => {
+    this.setState({
+      ILPpassword: event.target.value
+    })
+  }
+
   /*sendIlpPayment = () => {
     console.log("sendIlpPayment begins")
     //fetch('http://localhost:8080/?from=alice&to=http://charlie-node:7770/accounts/charlie/spsp&amount=20', {
@@ -241,11 +255,13 @@ class DonationButton extends Component {
       /*hostname: "51.91.8.116",
       port: 7770,*/
       /*path: '/accounts/' + 'alice' + '/payments',*/
-      path: '/accounts/' + 'acc1' + '/payments',
+      /*path: '/accounts/' + 'acc1' + '/payments',*/
+      path: '/accounts/' + this.state.ILPuser + '/payments',
       method: 'POST',
       headers: {
         /*'Authorization': 'Bearer alice_password',*/
-        'Authorization': 'Bearer acc1_password',
+        /*'Authorization': 'Bearer acc1_password',*/
+        'Authorization': 'Bearer ' + this.state.ILPpassword,
         'accept': 'application/json',
         'Content-Type': 'application/json',
         'Content-Length': data.length,
@@ -268,7 +284,7 @@ class DonationButton extends Component {
     req.end()
 
     /*var txt = "Amount: " + 20 + ", from: " + "alice" + ", to: " + "http://charlie-node:7770/accounts/charlie/spsp";*/
-    var txt = "Amount: " + 20 + ", from: " + "acc1" + ", to: " + "https://send.quartz.to/accounts/acc2/spsp"
+    var txt = "Amount: " + this.state.value + ", from: " + "acc1" + ", to: " + "https://send.quartz.to/accounts/acc2/spsp"
     console.log(txt);
   }
 
@@ -278,6 +294,8 @@ class DonationButton extends Component {
     const {classes} = this.props
     var value = this.state.value
     var hover = this.state.buttonHover
+    var ILPuser = this.state.ILPuser
+    var ILPpassword = this.state.ILPpassword
 
     var meta = document.createElement('meta');
     meta.name = "monetization";
@@ -705,10 +723,23 @@ class DonationButton extends Component {
                   />
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                  <TextField id="outlined-basic" label="User" variant="outlined" />
+                  <TextField
+                    id="outlined-basic"
+                    vlaue={ILPuser}
+                    onChange={this.handleUserChange}
+                    label="User"
+                    variant="outlined"
+                  />
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                  <TextField id="outlined-basic" label="Password" variant="outlined" type="password" />
+                  <TextField
+                    id="outlined-basic"
+                    value={ILPpassword}
+                    onChange={this.handlePasswordChange}
+                    label="Password"
+                    variant="outlined"
+                    type="password"
+                  />
                 </Grid>
 
                 {/*Espaciar bien*/}
