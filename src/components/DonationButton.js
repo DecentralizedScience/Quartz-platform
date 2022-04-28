@@ -138,6 +138,8 @@ class DonationButton extends Component {
     this.setDialog1Open(false)
     this.setDialogSuccessOpen(true)
     this.setDialogWaitOpen(false)
+    this.setDialogInterledgerOpen(false)
+    /*this.setDialogErrorOpen(false)*/
   }
 
   handleDialogSuccessClose = () => {
@@ -152,6 +154,8 @@ class DonationButton extends Component {
     this.setDialog1Open(false)
     this.setDialogErrorOpen(true)
     this.setDialogWaitOpen(false)
+    this.setDialogInterledgerOpen(false)
+    /*this.setDialogSuccessOpen(false)*/
   }
 
   handleDialogErrorClose = () => {
@@ -242,22 +246,28 @@ class DonationButton extends Component {
       }
     }
 
-    const req = https.request(options, res2 => {
+    var error = false;
 
+    const req = https.request(options, res2 => {
       res2.on('data', d => {
-        console.log('200', d.toString());
+        console.log('200', d.toString())
+      })
+      res2.on('end', () => {
+        this.handleDialogSuccessClickOpen()
       })
     })
 
     req.on('error', error => {
       console.log('500', 'Internal Server Error')
       console.error(error)
+      this.handleDialogErrorClickOpen()
     })
 
     req.write(data)
     req.end()
 
     var txt = "Amount: " + this.state.value + ", from: " + "acc1" + ", to: " + "https://send.quartz.to/accounts/acc2/spsp"
+
     console.log(txt);
   }
 
