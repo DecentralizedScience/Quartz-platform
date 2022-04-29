@@ -62,7 +62,7 @@ const styles = theme => ({
   paper2: {
     backgroundColor: "#99679A",
     color: "#ffffff",
-    width: 500,
+    width: 250,
     padding: 20
   },
   paperBanner: {
@@ -292,7 +292,7 @@ class DonationButton extends Component {
         square
       >
         <Grid container spacing={2} alignItems="center" justify="center">
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <Typography
               align="center"
             >
@@ -308,7 +308,7 @@ class DonationButton extends Component {
               </Link>
             </Typography>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <Grid container spacing={2} alignItems="center" justify="center" direction="column">
               <Grid item xs={12}>
                 <Button
@@ -322,7 +322,7 @@ class DonationButton extends Component {
                 </Button>
               </Grid>
               <Grid item xs={12} style={{fontSize: "10px", paddingTop: 0, height:'100%'}}>
-                {hover?("(You can change the amount later)"):("")}
+                {hover?("(You can change the amount later)"):(" ")}
               </Grid>
             </Grid>
           </Grid>
