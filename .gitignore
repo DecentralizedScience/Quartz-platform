@@ -25,3 +25,7 @@ yarn-error.log*
 .directory
 
 /src/serverConfig.json
+/src/components/config.json
+
+/register/server/node_modules
+/register/ui/node_modules

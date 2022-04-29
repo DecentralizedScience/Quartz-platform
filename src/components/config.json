@@ -1,6 +1,4 @@
 {
-  "text": "Hola esto es un texto escrito en el fichero de configuración",
-  "uphold_wallet": "$https://ilp.uphold.com/YJwBWzddQDXq",
-  "ILP_wallet_test": "http://charlie-node:7770/accounts/charlie/",
-  "ILP_wallet": "http://receive.quartz.to/accounts/acc2/"
+  "ILP_wallet": "http://receive.quartz.to/accounts/acc2/",
+  "PayPal_email": "apatesoreria@gmail.com"
 }
