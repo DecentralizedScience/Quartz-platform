@@ -11,7 +11,10 @@ Quartz platform using PayPal for marketplaces and platforms.
 To run and install this application you need:
 
 * [node](https://nodejs.org) and [npm](https://www.npmjs.com/)
-* A [PayPal developer account](https://developer.paypal.com/home)
+* A [PayPal account](https://www.paypal.com/webapps/mpp/account-selection)
+* A wallet able to receive Interledger payments. Such as:
+  * A [Quartz account](https://quartz.to/). Now we can only create accounts manually. Stay tuned for when Quartz registrations open.
+  * An account in some service like [Uphold](https://uphold.com/es)
 
 ## How to run this prototype
 First, clone the repo. Then, to install, run:
@@ -20,27 +23,15 @@ npm install
 ```
 
 ### Setup
-In the [PayPal developer's dashboard](https://developer.paypal.com/developer/applications) create a business sandbox account and a REST API app linked to said account. This app will have a certain `client-id` and a `secret`. Use those to generate an access token:
+Enter `src/components` and copy `config.json.example` in `config.json` and set the email associated to the PayPal account in `PayPal_email` and the wallet that can receive Interledger payments in `ILP_wallet`.
 ```
-curl -v https://api-m.sandbox.paypal.com/v1/oauth2/token \
-   -H "Accept: application/json" \
-   -H "Accept-Language: en_US" \
-   -u "<client-id>:<secret>" \
-   -d "grant_type=client_credentials"
+cp src/components/config.json.example src/components/config.json
 ```
 
-You also need a `Paypal-Partner-Attribution-Id`, that can be obtained by contacting the PayPal support team.
-
-After that, copy `serverConfig.json.example` in `serverConfig.json` and set the `Attribution-Id`, the `access-token` and the `client-id`.
+You must set your accounts in the copied document. Make sure the PayPal account can receive donations and the ILP account can receive payments.
 
 Once everything is set up, the application can be run.
 
-### Run server
-To run the server, open the src directory and run `nodemon`:
-```
-cd src
-nodemon server.js
-```
 
 ### Run the web app
 To run the web app, run:
@@ -48,4 +39,4 @@ To run the web app, run:
 npm start
 ```
 
-A browser window should then open, with our web app working and connected to PayPal.
+A browser window should then open, with our web app working and connected to PayPal and Interledger.
