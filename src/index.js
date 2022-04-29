@@ -8,8 +8,8 @@ import 'fontsource-nunito-sans'
 
 ReactDOM.render(
   <React.StrictMode>
-    {/*<App />*/}
-    <DonationButton/>
+    <App />
+    {/*<DonationButton/>*/}
   </React.StrictMode>,
   document.getElementById('root')
 );

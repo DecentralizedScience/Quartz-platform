@@ -25,7 +25,6 @@ import MenuBookIcon from '@material-ui/icons/MenuBook';
 import PeopleIcon from '@material-ui/icons/People';
 import { withStyles } from '@material-ui/core/styles'
 
-import App from '../App.js'
 import logo from '../img/logo.jpg'
 import Banner from '../img/fondo-banner.svg'
 import Confirmation from '../img/publication-ico.svg'
