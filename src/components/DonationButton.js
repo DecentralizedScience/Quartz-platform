@@ -401,7 +401,7 @@ class DonationButton extends Component {
                   </div>
                 </Grid>
                 <Grid item xs={6}>
-                  <form action="https://www.paypal.com/donate" method="post">
+                  <form action="https://www.paypal.com/donate" method="post" target="_blank">
                     <input type="hidden" name="business" value={config.PayPal_email}/>
                     <input type="hidden" name="no_recurring" value="0"/>
                     <input type="hidden" name="item_name" value="Friends of the Park"/>
