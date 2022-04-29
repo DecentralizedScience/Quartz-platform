@@ -408,7 +408,7 @@ class DonationButton extends Component {
                     <input type="hidden" name="item_number" value="Fall Cleanup Campaign"/>
                     <input type="hidden" name="amount" value={value}/>
                     <input type="hidden" name="currency_code" value="EUR"/>
-                    <input type="image" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="Donate"/>
+                    <input type="image" name="submit" src="https://www.paypalobjects.com/digitalassets/c/website/marketing/apac/C2/logos-buttons/optimize/44_Yellow_PayPal_Pill_Button.png" alt="Donate"/>
                     <img alt="" width="1" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" />
 
                   </form>
