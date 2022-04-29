@@ -402,12 +402,18 @@ class DonationButton extends Component {
                   </div>
                 </Grid>
                 <Grid item xs={6}>
-                  <App
-                    amount={this.state.value}
-                    onSuccess={this.handleDialogSuccessClickOpen}
-                    onError={this.handleDialogErrorClickOpen}
-                    onWait={this.handleDialogWaitClickOpen}
-                  />
+                  <form action="https://www.paypal.com/donate" method="post">
+                    <input type="hidden" name="business" value="email@example.com"/>
+                    <input type="hidden" name="no_recurring" value="0"/>
+                    <input type="hidden" name="item_name" value="Friends of the Park"/>
+                    <input type="hidden" name="item_number" value="Fall Cleanup Campaign"/>
+                    <input type="hidden" name="amount" value={value}/>
+                    <input type="hidden" name="currency_code" value="EUR"/>
+                    <input type="image" name="submit" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="Donate"/>
+                    <img alt="" width="1" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" />
+
+                  </form>
+
                 </Grid>
                 <Grid item xs={6}>
                   <Button
