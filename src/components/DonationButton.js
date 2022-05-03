@@ -63,8 +63,7 @@ const styles = theme => ({
     backgroundColor: "#99679A",
     color: "#ffffff",
     width: 250,
-    padding: 20,
-    line_height: "normal"
+    padding: 20
   },
   paperBanner: {
     padding: 10,
@@ -90,7 +89,8 @@ const DialogTitle = withStyles(styles)(props => {
 
 const DialogContent = withStyles(theme => ({
   root: {
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
+    lineHeight: "normal"
   }
 }))(MuiDialogContent)
 
