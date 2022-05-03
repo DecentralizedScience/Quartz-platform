@@ -64,7 +64,7 @@ const styles = theme => ({
     color: "#ffffff",
     width: 250,
     padding: 20,
-    line_heignt: "normal"
+    line_height: "normal"
   },
   paperBanner: {
     padding: 10,
