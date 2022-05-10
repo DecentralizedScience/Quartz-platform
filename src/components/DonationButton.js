@@ -251,9 +251,16 @@ class DonationButton extends Component {
     const req = https.request(options, res2 => {
       res2.on('data', d => {
         console.log('200', d.toString())
+        if(JSON.parse(d.toString()).status==405){
+          this.handleDialogErrorClickOpen()
+        }
+        else {
+          this.handleDialogSuccessClickOpen()
+        }
+        /*console.log(JSON.parse(d.toString()).status)*/
       })
       res2.on('end', () => {
-        this.handleDialogSuccessClickOpen()
+        /*this.handleDialogSuccessClickOpen()*/
       })
     })
 
@@ -606,7 +613,6 @@ class DonationButton extends Component {
                     <a
                       href="https://twitter.com/share?ref_src=twsrc%5Etfw"
                       target="_blank"
-                      class="twitter-share-button"
                       data-text="I have just donated to Open Access with @quartzoa. Check it out and donate yoursef!"
                       data-hashtags="#openaccess "
                       data-related="quartzoa,decent_science"
