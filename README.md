@@ -23,7 +23,30 @@ npm install
 ```
 
 ### Setup
+There are three ways of configuring this app, as we describe bellow. Each of them has more priority than the following. For instance, using the properties of the react component would override the QuartzSettings data element and the configuration file options.
+
+#### Using properties of the react component
+The App component receives `PayPal_email` and `ILP_wallet` as properties. Thus, you can configure the app by specifying them in your html as:
+
+```
+<App PayPal_email="email@example.com" ILP_wallet="ILPAdrress">
+```
+
+#### Using QuartzSettings data element.
+The app will alse read the data of an HTML data element with id "QuartzOASettings" and the following data parameters:
+
+```
+<data id="QuartzOASettings"
+  data-PayPal_email="email@example.com"
+  data-ILP_wallet="ILPAdrress">
+</data>
+```
+
+
+#### Using the configuration file
+
 Enter `src/components` and copy `config.json.example` in `config.json` and set the email associated to the PayPal account in `PayPal_email` and the wallet that can receive Interledger payments in `ILP_wallet`.
+
 ```
 cp src/components/config.json.example src/components/config.json
 ```

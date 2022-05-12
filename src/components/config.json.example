@@ -1,4 +1,4 @@
 {
-  "ILP_wallet": <ILP wallet>,
-  "PayPal_email": <Email associated to the PayPal account>
+  "ILP_wallet": "<ILP wallet>",
+  "PayPal_email": "<Email associated to the PayPal account>"
 }

@@ -30,10 +30,7 @@ import Banner from '../img/fondo-banner.svg'
 import Confirmation from '../img/publication-ico.svg'
 import Ilp from '../img/ilp.jpeg'
 
-import config from './config.json'
-
 var https = require('https');
-
 
 const styles = theme => ({
   root: {
@@ -116,6 +113,9 @@ class DonationButton extends Component {
       ILPuser: "",
       ILPpassword: ""
     }
+
+    console.log(this.props)
+    console.log(props);
   }
 
   setDialog1Open(val){
@@ -230,7 +230,7 @@ class DonationButton extends Component {
     console.log("sendIlpPayment begins")
 
     const data = JSON.stringify({
-      "receiver": config.ILP_wallet + "spsp",
+      "receiver": this.props.ILP_wallet + "spsp",
       "source_amount": this.state.value
     })
 
@@ -289,7 +289,7 @@ class DonationButton extends Component {
 
     var meta = document.createElement('meta');
     meta.name = "monetization";
-    meta.content = config.ILP_wallet;
+    meta.content = this.props.ILP_wallet;
     document.getElementsByTagName("head")[0].appendChild(meta)
 
 
@@ -410,7 +410,7 @@ class DonationButton extends Component {
                 </Grid>
                 <Grid item xs={6}>
                   <form action="https://www.paypal.com/donate" method="post" target="_blank">
-                    <input type="hidden" name="business" value={config.PayPal_email}/>
+                    <input type="hidden" name="business" value={this.props.PayPal_email}/>
                     <input type="hidden" name="no_recurring" value="0"/>
                     <input type="hidden" name="item_name" value="Friends of the Park"/>
                     <input type="hidden" name="item_number" value="Fall Cleanup Campaign"/>
