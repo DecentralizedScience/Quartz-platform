@@ -37,8 +37,8 @@ The app will alse read the data of an HTML data element with id "QuartzOASetting
 
 ```
 <data id="QuartzOASettings"
-  data-PayPal_email="email@example.com"
-  data-ILP_wallet="ILPAdrress">
+  data-paypal_email="email@example.com"
+  data-ilp_wallet="ILPAdrress">
 </data>
 ```
 
