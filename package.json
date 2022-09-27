@@ -2,6 +2,7 @@
   "name": "react-paypal",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://DecentralizedScience.github.io/Quartz-platform",
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
@@ -10,6 +11,7 @@
     "@testing-library/react": "^11.1.2",
     "@testing-library/user-event": "^12.2.2",
     "fontsource-nunito-sans": "^3.0.9",
+    "gh-pages": "^4.0.0",
     "paypal": "^1.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -17,6 +19,8 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
+    "predeploy": "PUBLIC_URL=https://DecentralizedScience.github.io/Quartz-platform npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
