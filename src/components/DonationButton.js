@@ -329,7 +329,7 @@ class DonationButton extends Component {
                   {hover?("I WILL DONATE 20€"):(this.state.buttonText)}
                 </Button>
               </Grid>
-              <Grid item xs={12} style={{fontSize: "10px", paddingTop: 0, height:'100%'}}>
+              <Grid item xs={12} style={{fontSize: "10px", paddingTop: 0, height:'100%', 'min-height': '2.1em'}}>
                 {hover?("(You can change the amount later)"):(" ")}
               </Grid>
             </Grid>
