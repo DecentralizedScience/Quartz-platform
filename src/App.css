@@ -8,8 +8,8 @@
 }
 
 .MuiDialog-root {
-  top: 0px;
-  left: 100px;
+  top: 0px !important;
+  left: 0px !important;
 }
 
 @media (prefers-reduced-motion: no-preference) {
